@@ -1,0 +1,22 @@
+{
+  "name": "rmd-dashboard",
+  "version": "0.0.0",
+  "description": "A web dashboard that displays useful sprint information",
+  "main": "index.js",
+  "dependencies": {
+    "express": "~4.2.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iknowcss/rmd-dashboard.git"
+  },
+  "author": "Cody Jenkins <iknowcss@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
