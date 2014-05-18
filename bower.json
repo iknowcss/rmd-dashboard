@@ -1,0 +1,20 @@
+{
+  "name": "rmd-dashboard",
+  "version": "0.0.0",
+  "homepage": "https://github.com/iknowcss/rmd-dashboard",
+  "authors": [
+    "Cody Jenkins <iknowcss@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "3.1.0"
+  }
+}

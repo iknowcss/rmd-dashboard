@@ -3,11 +3,18 @@
   "version": "0.0.0",
   "description": "A web dashboard that displays useful sprint information",
   "main": "index.js",
+  "engines": {
+    "node": "~0.10.28"
+  },
   "dependencies": {
     "express": "~4.2.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.5"
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jasmine": "~0.6.4",
+    "grunt-template-jasmine-istanbul": "~0.3.0",
+    "grunt-bower-task": "~0.3.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
