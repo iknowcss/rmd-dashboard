@@ -17,4 +17,4 @@ To set up the development environment, execute the following commands
 
 ## Run server in development mode
 
-    grunt run:dev
+    grunt run

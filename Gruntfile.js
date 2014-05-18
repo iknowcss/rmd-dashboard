@@ -50,6 +50,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jasmine_node']);
-  grunt.registerTask('run:dev', ['express:dev', 'watch'])
+  grunt.registerTask('run', ['express:dev', 'watch']);
 
 };

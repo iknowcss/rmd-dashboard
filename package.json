@@ -7,7 +7,8 @@
     "node": "~0.10.28"
   },
   "dependencies": {
-    "express": "~4.2.0"
+    "express": "~4.2.0",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
