@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     bower: {
       install: {
         options: {
-          targetDir: './ui-lib',
+          targetDir: './lib/ui',
           layout: 'byComponent',
           install: true,
           verbose: false,
@@ -14,14 +14,42 @@ module.exports = function (grunt) {
           bowerOptions: {}
         }
       }
+    },
+    jasmine_node: {
+      all: 'spec/server/'
+    },
+    jasmine: {
+
+    },
+    express: {
+      options: {
+
+      },
+      dev: {
+        options: {
+          script: 'src/server/app.js',
+          port: 1234
+        }
+      }
+    },
+    watch: {
+      express: {
+        files:  [ 'src/server/**/*.js' ],
+        tasks:  [ 'express:dev' ],
+        options: {
+          spawn: false
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  // Default tasks
-  grunt.registerTask('default', [
-    'bower:install'
-  ]);
+  grunt.registerTask('default', ['jasmine_node']);
+  grunt.registerTask('run:dev', ['express:dev', 'watch'])
 
 };
