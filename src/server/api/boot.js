@@ -12,7 +12,7 @@ function Bootstrapper(parentApp, version) {
   this.app = express();
   this.version = version;
   this.apiPath = path.join(__dirname, version);
-  this.endpoints = {};
+  this.definedEndpoints = {};
 }
 
 Bootstrapper.prototype.bootstrap = function () {
@@ -30,40 +30,69 @@ Bootstrapper.prototype.prepareApiApp = function () {
 
 Bootstrapper.prototype.prepareApiFile = function (fileName) {
   var uri,
-      obj;
+      data;
 
   logger.info('Prepare API file: ', fileName);
-  obj = require(path.join(this.apiPath, fileName));
+  data = require(path.join(this.apiPath, fileName));
 
-  if (_.isString(obj.uri)) {
-    uri = path.join('/', this.version, obj.uri);
-
-    REST_METHODS.forEach(function (method) {
-      if (!_.isUndefined(obj[method])) {
-        this.prepareEndpoint(fileName, uri, method, obj);
-      }
-    }, this);
-
+  if (_.isString(data.rootUri)) {
+    if (_.isArray(data.endpoints)) {
+      this.prepareEndpoints(data.rootUri, data.endpoints);
+    } else {
+      logger.warn('Skip ', fileName, 
+          ' because it does not specify any endpoints');
+    }
+  } else if (_.isString(data.uri)) {
+    this.prepareEndpoint(data.uri, data);
   } else {
-    logger.warn('Skip ', fileName, ' because it does not specify a valid uri');
+    logger.warn('Skip ', fileName, 
+        ' because it does not specify any endpoints');
   }
 };
 
-Bootstrapper.prototype.prepareEndpoint = function (fileName, uri, method, obj) {
-  if (!this.endpoints.hasOwnProperty(uri)) {
-    this.endpoints[uri] = {};
+Bootstrapper.prototype.prepareEndpoints = function (rootUri, endpoints) {
+  logger.info('Preparing endpoints with root URI: ', 
+      path.join('/', this.version, rootUri));
+  endpoints.forEach(function (endpoint) {
+    this.prepareEndpoint(rootUri, endpoint);
+  }, this);
+};
+
+Bootstrapper.prototype.prepareEndpoint = function (rootUri, endpoint) {
+  var relativeUri = _.isUndefined(endpoint.uri) ? '': endpoint.uri,
+      uri = path.join('/', rootUri, relativeUri).replace(/\/+$/, '');
+
+  // If there is not an entry in the hash for this URI, create one
+  if (!this.definedEndpoints[uri]) {
+    this.definedEndpoints[uri] = {};
   }
 
-  if (!this.endpoints[uri].hasOwnProperty(method)) {
-    logger.info(method.toUpperCase(), ' ', uri);
-    if (_.isFunction(obj[method])) {
-      this.app[method](uri, obj[method]);
+  // Define any endpoints that this endpoint supports
+  REST_METHODS.forEach(function (method) {
+    if (endpoint.hasOwnProperty(method)) {
+      this.prepareEndpointMethod(uri, method, endpoint);
     }
-    this.endpoints[uri][method] = fileName;
+  }, this);
+};
+
+Bootstrapper.prototype.prepareEndpointMethod = function (uri, method, endpoint) {
+  var fullUri = path.join('/', this.version, uri);
+
+  // If this endpoint and method has not yet been defined, define it
+  if (!this.definedEndpoints[uri][method]) {
+    logger.info(method.toUpperCase(), ' ', fullUri);
+    if (_.isFunction(endpoint[method])) {
+      this.app[method](fullUri, endpoint[method]);
+    } else {
+      logger.warn('Endpoint "', method.toUpperCase(), ' ', fullUri,
+         '" does not have a valid handler');  
+    }
+    this.definedEndpoints[uri][method] = true;
   } else {
-    logger.warn('The endpoint "', method.toUpperCase(), ' ', uri,
-        '" is already defined in ', this.endpoints[uri][method]);
+    logger.warn('Endpoint "', method.toUpperCase(), ' ', uri,
+        '" is already defined');
   }
+
 };
 
 module.exports = function (parentApp, version) {

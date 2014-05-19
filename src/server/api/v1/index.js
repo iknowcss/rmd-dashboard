@@ -1,7 +1,6 @@
 module.exports = {
 
-  uri: '/',
-
+  uri: '',
   get: function (req, resp) {
     resp.send({ started: true });
   }
