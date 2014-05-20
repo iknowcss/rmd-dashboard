@@ -1,4 +1,6 @@
-var request = require('request'),
+var path    = require('path'),
+    request = require('request'),
+    nconf   = require('nconf'),
     Q       = require('q');
 
 module.exports = {
@@ -10,22 +12,23 @@ module.exports = {
     options = {
       json: true,
       auth: {
-        user: '',
-        pass: ''
+        user: nconf.get('bamboo-rest:user'),
+        pass: nconf.get('bamboo-rest:pass')
       },
-      url: 'https://host/rest/api/latest/plan/',
+      url: nconf.get('bamboo-rest:baseUrl') + '/rest/api/latest/plan/',
       qs: {
         favourite: true
       }
     };
 
     request.get(options, function (error, res, body) {
+      console.log(arguments)
       if (!error && res.statusCode === 200) {
         deferred.resolve(body, res);
       } else {
         deferred.reject({
           error: error,
-          statusCode: res.statusCode
+          statusCode: res ? res.statusCode : error.code
         });
       }
     });

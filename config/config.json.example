@@ -1,0 +1,10 @@
+{
+  "express": {
+    "port": 3000
+  },
+  "bamboo-rest": {
+    "baseUrl": "https://example.com",
+    "user": "automatedbamboo",
+    "pass": "ThatsTheSameCombinationAsMyLuggage"
+  }
+}
