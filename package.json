@@ -9,7 +9,8 @@
   "dependencies": {
     "express": "~4.2.0",
     "underscore": "~1.6.0",
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "request": "~2.36.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
