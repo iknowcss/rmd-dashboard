@@ -13,6 +13,9 @@ nconf.file({ file: './config/config.json' });
 nconf.defaults({
   express: {
     port: process.env.PORT
+  },
+  request: {
+    'reject-unauthorized': true
   }
 });
 

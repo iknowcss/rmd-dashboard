@@ -13,7 +13,16 @@ module.exports = {
         resp.send({ available: true })
       }
     }, {
-      uri: '/list',
+      uri: '/plans',
+      get: function (req, res) {
+        bamboo
+          .getLatestPlans({ favorite: true })
+          .then(sendAsJson(res))
+          .catch(sendAsJson(res))
+          .done();
+      }
+    }, {
+      uri: '/results',
       get: function (req, res) {
         bamboo
           .getLatestResults({ favorite: true })
