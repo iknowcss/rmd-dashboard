@@ -20,8 +20,6 @@ nconf.defaults({
 /// - Constructor --------------------------------------------------------------
 
 function BambooRest() {
-  this.cache = {};
-  this.cacheTimeout = nconf.get('cache-timeout:bamboo-rest');
 }
 
 /// - Data source config -------------------------------------------------------
