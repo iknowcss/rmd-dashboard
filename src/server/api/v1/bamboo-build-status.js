@@ -5,16 +5,11 @@ var nconf     = require('nconf'),
     logger    = require('../../util/logger')
     bamboo    = require('../../data-source/bamboo/bamboo-rest'),
 
-    ps        = {},
-    handler   = { processor: ps };
-
-/// - Export -------------------------------------------------------------------
-
-module.exports = handler;
+    ps        = new BuildStatusProcessor();
 
 /// - Endpoints ----------------------------------------------------------------
 
-_.extend(handler, {
+module.exports = {
 
   rootUri: '/bamboo-build-status',
   endpoints: [
@@ -44,11 +39,21 @@ _.extend(handler, {
     }
   ]
 
-});
+};
+
+/// - Processing constructor ---------------------------------------------------
+
+function BuildStatusProcessor() {
+  // Pre-bind all functions to this object so they may be passed to Q
+  // without explicitly binding to this each time
+  _.functions(this).forEach(function (name) {
+    this[name] = _.bind(this[name], this);
+  }, this);
+}
 
 /// - Processing functions -----------------------------------------------------
 
-_.extend(ps, {
+_.extend(BuildStatusProcessor.prototype, {
 
   processLatestPlans: function (data) {
     var output = {};
