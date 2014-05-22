@@ -47,7 +47,9 @@ function BuildStatusProcessor() {
   // Pre-bind all functions to this object so they may be passed to Q
   // without explicitly binding to this each time
   _.functions(this).forEach(function (name) {
-    this[name] = _.bind(this[name], this);
+    if (name !== 'constructor') {
+      this[name] = _.bind(this[name], this);
+    }
   }, this);
 }
 
