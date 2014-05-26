@@ -2,10 +2,8 @@ var nconf     = require('nconf'),
     Q         = require('q'),
     _         = require('underscore'),
 
-    logger    = require('../../util/logger')
-    bamboo    = require('../../data-source/bamboo/bamboo-rest'),
-
-    ps        = new BuildStatusProcessor();
+    logger    = require('../../util/logger'),
+    bamboo    = require('../../service/bamboo/bamboo-service');
 
 /// - Endpoints ----------------------------------------------------------------
 
@@ -18,20 +16,19 @@ module.exports = {
         resp.send({ available: true })
       }
     }, {
-      uri: '/plans',
+      uri: '/plan-digest',
       get: function (req, res) {
         bamboo
-          .getLatestPlans({ favorite: true })
-          .then(ps.processLatestPlans)
+          .getLatestPlanDigest()
           .then(sendAsJson(res))
           .catch(sendAsJson(res))
           .done();
       }
     }, {
-      uri: '/results',
+      uri: '/build-board',
       get: function (req, res) {
         bamboo
-          .getLatestResults({ favorite: true })
+          .getLatestBuildBoardDigest({ favorite: true })
           .then(sendAsJson(res))
           .catch(sendAsJson(res))
           .done();
@@ -40,57 +37,6 @@ module.exports = {
   ]
 
 };
-
-/// - Processing constructor ---------------------------------------------------
-
-function BuildStatusProcessor() {
-  // Pre-bind all functions to this object so they may be passed to Q
-  // without explicitly binding to this each time
-  _.functions(this).forEach(function (name) {
-    if (name !== 'constructor') {
-      this[name] = _.bind(this[name], this);
-    }
-  }, this);
-}
-
-/// - Processing functions -----------------------------------------------------
-
-_.extend(BuildStatusProcessor.prototype, {
-
-  processLatestPlans: function (data) {
-    var output = {};
-
-    logger.info('Process latest plans');
-    output.plans = _.map(data.plans.plan, function (plan) {
-      return {
-        shortName : plan.shortName,
-        key       : plan.key,
-        name      : plan.name
-      };
-    });
-
-    return output;
-  },
-
-  processLatestResults: function (data) {
-    return data;
-
-    // logger.info('Process latest results');
-    // return _.map(data.results.result, function (build) {
-    //   var match = build.key.match(/^(.+?)-\d+$/)
-    //       planKey = match[1],
-    //       plan = _.where(this.cache.latestPlans.plans, { key: planKey })[0];
-    //   return {
-    //     plan            : plan,
-    //     key             : build.key,
-    //     number          : build.number,
-    //     lifeCycleState  : build.lifeCycleState,
-    //     state           : build.state
-    //   };
-    // }, this);
-  }
-
-});
 
 /// - Utility functions --------------------------------------------------------
 
