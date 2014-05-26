@@ -15,85 +15,85 @@ function Bootstrapper(parentApp, version) {
   this.definedEndpoints = {};
 }
 
-Bootstrapper.prototype.bootstrap = function () {
-  this.prepareApiApp();
-  this.parentApp.use(this.app);
-  this.parentApp.use(function (req, res) {
-    res.status(404).send('');
-  });
-};
+_.extend(Bootstrapper.prototype, {
 
-Bootstrapper.prototype.prepareApiApp = function () {
-  logger.info('Start API ', this.version, ' using path: ', this.apiPath);
-  fs.readdirSync(this.apiPath).forEach(this.prepareApiFile, this);
-};
+  bootstrap: function () {
+    this.prepareApiApp();
+    this.parentApp.use(this.app);
+  },
 
-Bootstrapper.prototype.prepareApiFile = function (fileName) {
-  var uri,
-      data;
+  prepareApiApp: function () {
+    logger.info('Start API ', this.version, ' using path: ', this.apiPath);
+    fs.readdirSync(this.apiPath).forEach(this.prepareApiFile, this);
+  },
 
-  logger.info('Prepare API file: ', fileName);
-  data = require(path.join(this.apiPath, fileName));
+  prepareApiFile: function (fileName) {
+    var data;
 
-  if (_.isString(data.rootUri)) {
-    if (_.isArray(data.endpoints)) {
-      this.prepareEndpoints(data.rootUri, data.endpoints);
+    logger.info('Prepare API file: ', fileName);
+    data = require(path.join(this.apiPath, fileName));
+
+    if (_.isString(data.rootUri)) {
+      if (_.isArray(data.endpoints)) {
+        this.prepareEndpoints(data.rootUri, data.endpoints);
+      } else {
+        logger.warn('Skip ', fileName, 
+            ' because it does not specify any endpoints');
+      }
+    } else if (_.isString(data.uri)) {
+      this.prepareEndpoint(data.uri, data);
     } else {
       logger.warn('Skip ', fileName, 
           ' because it does not specify any endpoints');
     }
-  } else if (_.isString(data.uri)) {
-    this.prepareEndpoint(data.uri, data);
-  } else {
-    logger.warn('Skip ', fileName, 
-        ' because it does not specify any endpoints');
-  }
-};
+  },
 
-Bootstrapper.prototype.prepareEndpoints = function (rootUri, endpoints) {
-  logger.info('Preparing endpoints with root URI: ', 
-      path.join('/', this.version, rootUri));
-  endpoints.forEach(function (endpoint) {
-    this.prepareEndpoint(rootUri, endpoint);
-  }, this);
-};
+  prepareEndpoints: function (rootUri, endpoints) {
+    logger.info('Preparing endpoints with root URI: ', 
+        path.join('/api/', this.version, rootUri));
+    endpoints.forEach(function (endpoint) {
+      this.prepareEndpoint(rootUri, endpoint);
+    }, this);
+  },
 
-Bootstrapper.prototype.prepareEndpoint = function (rootUri, endpoint) {
-  var relativeUri = _.isUndefined(endpoint.uri) ? '': endpoint.uri,
-      uri = path.join('/', rootUri, relativeUri).replace(/\/+$/, '');
+  prepareEndpoint: function (rootUri, endpoint) {
+    var relativeUri = _.isUndefined(endpoint.uri) ? '': endpoint.uri,
+        uri = path.join('/', rootUri, relativeUri).replace(/\/+$/, '');
 
-  // If there is not an entry in the hash for this URI, create one
-  if (!this.definedEndpoints[uri]) {
-    this.definedEndpoints[uri] = {};
-  }
-
-  // Define any endpoints that this endpoint supports
-  REST_METHODS.forEach(function (method) {
-    if (endpoint.hasOwnProperty(method)) {
-      this.prepareEndpointMethod(uri, method, endpoint);
+    // If there is not an entry in the hash for this URI, create one
+    if (!this.definedEndpoints[uri]) {
+      this.definedEndpoints[uri] = {};
     }
-  }, this);
-};
 
-Bootstrapper.prototype.prepareEndpointMethod = function (uri, method, endpoint) {
-  var fullUri = path.join('/', this.version, uri);
+    // Define any endpoints that this endpoint supports
+    REST_METHODS.forEach(function (method) {
+      if (endpoint.hasOwnProperty(method)) {
+        this.prepareEndpointMethod(uri, method, endpoint);
+      }
+    }, this);
+  },
 
-  // If this endpoint and method has not yet been defined, define it
-  if (!this.definedEndpoints[uri][method]) {
-    logger.info(method.toUpperCase(), ' ', fullUri);
-    if (_.isFunction(endpoint[method])) {
-      this.app[method](fullUri, endpoint[method]);
+  prepareEndpointMethod: function (uri, method, endpoint) {
+    var fullUri = path.join('/api/', this.version, uri);
+
+    // If this endpoint and method has not yet been defined, define it
+    if (!this.definedEndpoints[uri][method]) {
+      logger.info(method.toUpperCase(), ' ', fullUri);
+      if (_.isFunction(endpoint[method])) {
+        this.app[method](fullUri, endpoint[method]);
+      } else {
+        logger.warn('Endpoint "', method.toUpperCase(), ' ', fullUri,
+           '" does not have a valid handler');  
+      }
+      this.definedEndpoints[uri][method] = true;
     } else {
-      logger.warn('Endpoint "', method.toUpperCase(), ' ', fullUri,
-         '" does not have a valid handler');  
+      logger.warn('Endpoint "', method.toUpperCase(), ' ', uri,
+          '" is already defined');
     }
-    this.definedEndpoints[uri][method] = true;
-  } else {
-    logger.warn('Endpoint "', method.toUpperCase(), ' ', uri,
-        '" is already defined');
+
   }
 
-};
+});
 
 module.exports = function (parentApp, version) {
   new Bootstrapper(parentApp, version).bootstrap();

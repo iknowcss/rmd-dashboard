@@ -25,6 +25,14 @@ module.exports = app;
 // Apply API handlers
 require('./api/boot')(app, 'v1');
 
+// Apply UI handlers
+require('./ui/boot')(app);
+
+// Handle 404s
+app.use(function (req, res) {
+  res.status(404).send('');
+})
+
 // Only start the server if this module was not loaded from
 // another module
 if (!module.parent) {
