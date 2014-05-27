@@ -11,7 +11,8 @@
     "underscore": "~1.6.0",
     "q": "~1.0.1",
     "request": "~2.36.0",
-    "nconf": "~0.6.9"
+    "nconf": "~0.6.9",
+    "node-cache": "~1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

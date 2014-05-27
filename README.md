@@ -73,6 +73,16 @@ Your firewall is probably blocking connections to port 22 (SSH). Run the followi
 
 Read more about it [here](https://coderwall.com/p/sitezg).
 
+## I get a "Cannot find module" error
+
+Does it look kind of like this?
+
+    Error: Cannot find module 'underscore'
+
+You probably do not have the latest dependencies. Run the following command from the project root to download the latest dependencies:
+
+    npm install
+
 ## When I execute `grunt run:e2e` I get an error
 Does it look like this?
 
