@@ -9,14 +9,6 @@ var nconf      = require('nconf'),
 
 module.exports = new BambooRest();
 
-/// - Cache-settings -----------------------------------------------------------
-
-nconf.defaults({
-  'cache-timeout': {
-    'bamboo-rest': 60
-  }
-});
-
 /// - Constructor --------------------------------------------------------------
 
 function BambooRest() {
@@ -28,6 +20,7 @@ datasource(BambooRest.prototype, {
 
   protocol : nconf.get('bamboo-rest:protocol'),
   host     : nconf.get('bamboo-rest:host'),
+  port     : nconf.get('bamboo-rest:port'),
   baseUrl  : nconf.get('bamboo-rest:baseUrl'),
 
   auth: {

@@ -18,13 +18,22 @@ module.exports = function (mixinPrototype, rawOptions) {
       var parts,
           result;
 
-      parts = [dataSourceOptions.host, dataSourceOptions.baseUrl]
-          .concat(slice.call(arguments));
+      // Get the arguments as an array
+      parts = slice.call(arguments);
 
+      // Put the baseUrl at the front of the array end with a forward-slash
+      parts.unshift('/' + dataSourceOptions.baseUrl);
+      parts.push('/');
+
+
+      // Construct the full URL
       result = dataSourceOptions.protocol + '://' +
+          dataSourceOptions.host + 
+          (!_.isUndefined(dataSourceOptions.port) ?
+              ':' + dataSourceOptions.port : '') +
           path.join.apply(path, parts);
 
-      return result + (result.slice(-1) !== '/' ? '/' : '');
+      return result;
     },
 
     makeRequest: function (relativeUrl, options) {
@@ -67,15 +76,9 @@ function processOptions(rawOptions) {
     logger.error('An options argument is required').andThrow();
   }
 
-  verifyAndCopyStringProperties(['protocol', 'host'], rawOptions, options);
-
-  if (_.isString(rawOptions.baseUrl)) {
-    options.baseUrl = rawOptions.baseUrl;
-  } else if (_.isUndefined(rawOptions.baseUrl)) {
-    options.baseUrl = '';
-  } else {
-    logger.error('The "baseUrl" may only be a string or undefined').andThrow();
-  }
+  copyProperties(['protocol', 'host'], copyNonEmptyString, rawOptions, options);
+  copyProperties(['baseUrl'], copyString, rawOptions, options);
+  copyProperties(['port'], copyIntegerOrUndefined, rawOptions, options);
 
   options.defaultRequestOptions = {};
   if (!_.isUndefined(rawOptions.requestOptions)) {
@@ -85,20 +88,47 @@ function processOptions(rawOptions) {
   if (_.isObject(rawOptions.auth)) {
     options.auth = {};
     options.defaultRequestOptions.auth = options.auth;
-    verifyAndCopyStringProperties(['user', 'pass'], 
+    copyProperties(['user', 'pass'], copyNonEmptyString,
         rawOptions.auth, options.auth);
   }
 
   return options;
 }
 
-function verifyAndCopyStringProperties(properties, from, to) {
+/// - Copy util ----------------------------------------------------------------
+
+function copyProperties(properties, coppier, from, to) {
   properties.forEach(function (property) {
-    if (_.isString(from[property])) {
-      to[property] = from[property];
-    } else {
-      logger.error('The "' + property + '" property must be a valid string')
-          .andThrow();
-    }
+    coppier(property, from, to);
   });
+}
+
+function copyNonEmptyString(property, from, to) {
+  if (from[property] && _.isString(from[property])) {
+    to[property] = from[property];
+  } else {
+    logger
+      .error('The "' + property + '" property must be a non-empty string')
+      .andThrow();
+  }
+}
+
+function copyString(property, from, to) {
+  if (_.isString(from[property])) {
+    to[property] = from[property];
+  } else {
+    logger
+      .error('The "' + property + '" property must be a string')
+      .andThrow();
+    }
+}
+
+function copyIntegerOrUndefined(property, from, to) {
+  if (_.isUndefined(from[property]) || ~~from[property] === from[property]) {
+    to[property] = from[property];
+  } else {
+    logger
+      .error('The "' + property + '" property must be an integer or undefined')
+      .andThrow();
+    }
 }

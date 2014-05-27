@@ -1,0 +1,279 @@
+{
+  "expand": "plans",
+  "link": {
+    "href": "http://bamboo.ec2.local/rest/api/latest/plan/",
+    "rel": "self"
+  },
+  "plans": {
+    "expand": "plan",
+    "max-result": 22,
+    "plan": [
+      {
+        "enabled": true,
+        "key": "CAL-CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/CAL-CI",
+          "rel": "self"
+        },
+        "name": "CI - CAL - CAL Trunk Build",
+        "shortKey": "CI",
+        "shortName": "CAL Trunk Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "CAL-CALCUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/CAL-CALCUKE",
+          "rel": "self"
+        },
+        "name": "CI - CAL - CAL Trunk Cuke",
+        "shortKey": "CALCUKE",
+        "shortName": "CAL Trunk Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO-REBRANDINGBUILD",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO-REBRANDINGBUILD",
+          "rel": "self"
+        },
+        "name": "CI - ECO - ECO Rebranding Build",
+        "shortKey": "REBRANDINGBUILD",
+        "shortName": "ECO Rebranding Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO-CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO-CI",
+          "rel": "self"
+        },
+        "name": "CI - ECO - ECO Trunk Build",
+        "shortKey": "CI",
+        "shortName": "ECO Trunk Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO-FULLCI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO-FULLCI",
+          "rel": "self"
+        },
+        "name": "CI - ECO - ECO Trunk Cuke",
+        "shortKey": "FULLCI",
+        "shortName": "ECO Trunk Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO-FASTCUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO-FASTCUKE",
+          "rel": "self"
+        },
+        "name": "CI - ECO - ECO Trunk Fast Cuke",
+        "shortKey": "FASTCUKE",
+        "shortName": "ECO Trunk Fast Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-CALBUILD",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-CALBUILD",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - CAL Release 2.6 Build",
+        "shortKey": "CALBUILD",
+        "shortName": "CAL Release 2.6 Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-CALCUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-CALCUKE",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - CAL Release 2.6 Cuke",
+        "shortKey": "CALCUKE",
+        "shortName": "CAL Release 2.6 Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-ECOBUILD",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-ECOBUILD",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - ECO Release 2.6 Build",
+        "shortKey": "ECOBUILD",
+        "shortName": "ECO Release 2.6 Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-ECOCUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-ECOCUKE",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - ECO Release 2.6 Cuke",
+        "shortKey": "ECOCUKE",
+        "shortName": "ECO Release 2.6 Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-ECX2CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-ECX2CI",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - ECX2 Release 2.6 Build",
+        "shortKey": "ECX2CI",
+        "shortName": "ECX2 Release 2.6 Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-NGCSS10CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-NGCSS10CI",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - NGCS (S10) Release 2.6 Build",
+        "shortKey": "NGCSS10CI",
+        "shortName": "NGCS (S10) Release 2.6 Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0260-NGCSS9CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0260-NGCSS9CI",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.6.x - NGCS (S9) Release 2.6 Build",
+        "shortKey": "NGCSS9CI",
+        "shortName": "NGCS (S9) Release 2.6 Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0299-ECXCI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0299-ECXCI",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.99.x - ECX2 (trunk) Build",
+        "shortKey": "ECXCI",
+        "shortName": "ECX2 (trunk) Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0299-NEWPORTCI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0299-NEWPORTCI",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.99.x - NGCS (NewPort) Trunk Build",
+        "shortKey": "NEWPORTCI",
+        "shortName": "NGCS (NewPort) Trunk Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECO0299-NGCSCI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECO0299-NGCSCI",
+          "rel": "self"
+        },
+        "name": "CI - EasyCare Release 2.99.x - NGCS (S9) Trunk Build",
+        "shortKey": "NGCSCI",
+        "shortName": "NGCS (S9) Trunk Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "ECX-CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/ECX-CI",
+          "rel": "self"
+        },
+        "name": "CI - Exchange - ECX2 Trunk Snapshot Build",
+        "shortKey": "CI",
+        "shortName": "ECX2 Trunk Snapshot Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "NGCS-CI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/NGCS-CI",
+          "rel": "self"
+        },
+        "name": "CI - NGCS - NGCS Trunk Snapshot Build",
+        "shortKey": "CI",
+        "shortName": "NGCS Trunk Snapshot Build",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "NGCS-CUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/NGCS-CUKE",
+          "rel": "self"
+        },
+        "name": "CI - NGCS - NGCS Trunk Snapshot Cuke",
+        "shortKey": "CUKE",
+        "shortName": "NGCS Trunk Snapshot Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "NGCS-PNCI",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/NGCS-PNCI",
+          "rel": "self"
+        },
+        "name": "CI - NGCS - Puerto Nuevo CI - Build and Test",
+        "shortKey": "PNCI",
+        "shortName": "Puerto Nuevo CI - Build and Test",
+        "type": "chain"
+      },
+      {
+        "enabled": true,
+        "key": "PT-CUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/PT-CUKE",
+          "rel": "self"
+        },
+        "name": "Test - PT Environment - E2E Performance Cuke",
+        "shortKey": "CUKE",
+        "shortName": "E2E Performance Cuke",
+        "type": "chain"
+      },
+      {
+        "enabled": false,
+        "key": "E2E-FULLDEPLOYCUKE",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/plan/E2E-FULLDEPLOYCUKE",
+          "rel": "self"
+        },
+        "name": "X Legacy - End to End Environment - E2E Functional Regression",
+        "shortKey": "FULLDEPLOYCUKE",
+        "shortName": "E2E Functional Regression",
+        "type": "chain"
+      }
+    ],
+    "size": 22,
+    "start-index": 0
+  }
+}

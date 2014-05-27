@@ -1,0 +1,257 @@
+{
+  "expand": "results",
+  "link": {
+    "href": "http://bamboo.ec2.local/rest/api/latest/result",
+    "rel": "self"
+  },
+  "results": {
+    "expand": "result",
+    "max-result": 22,
+    "result": [
+      {
+        "id": 95427575,
+        "key": "CAL-CI-2033",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/CAL-CI-2033",
+          "rel": "self"
+        },
+        "number": 2033,
+        "state": "Successful"
+      },
+      {
+        "id": 95427676,
+        "key": "CAL-CALCUKE-1392",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/CAL-CALCUKE-1392",
+          "rel": "self"
+        },
+        "number": 1392,
+        "state": "Failed"
+      },
+      {
+        "id": 95425763,
+        "key": "ECO-REBRANDINGBUILD-21",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO-REBRANDINGBUILD-21",
+          "rel": "self"
+        },
+        "number": 21,
+        "state": "Successful"
+      },
+      {
+        "id": 95427833,
+        "key": "ECO-CI-11099",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO-CI-11099",
+          "rel": "self"
+        },
+        "number": 11099,
+        "state": "Successful"
+      },
+      {
+        "id": 95427910,
+        "key": "ECO-FULLCI-4011",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO-FULLCI-4011",
+          "rel": "self"
+        },
+        "number": 4011,
+        "state": "Failed"
+      },
+      {
+        "id": 95427866,
+        "key": "ECO-FASTCUKE-517",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO-FASTCUKE-517",
+          "rel": "self"
+        },
+        "number": 517,
+        "state": "Successful"
+      },
+      {
+        "id": 92668966,
+        "key": "ECO0260-CALBUILD-2",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-CALBUILD-2",
+          "rel": "self"
+        },
+        "number": 2,
+        "state": "Successful"
+      },
+      {
+        "id": 95420680,
+        "key": "ECO0260-CALCUKE-5",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-CALCUKE-5",
+          "rel": "self"
+        },
+        "number": 5,
+        "state": "Successful"
+      },
+      {
+        "id": 95427858,
+        "key": "ECO0260-ECOBUILD-119",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-ECOBUILD-119",
+          "rel": "self"
+        },
+        "number": 119,
+        "state": "Successful"
+      },
+      {
+        "id": 95427601,
+        "key": "ECO0260-ECOCUKE-40",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-ECOCUKE-40",
+          "rel": "self"
+        },
+        "number": 40,
+        "state": "Failed"
+      },
+      {
+        "id": 95427628,
+        "key": "ECO0260-ECX2CI-23",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-ECX2CI-23",
+          "rel": "self"
+        },
+        "number": 23,
+        "state": "Successful"
+      },
+      {
+        "id": 95427636,
+        "key": "ECO0260-NGCSS10CI-39",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-NGCSS10CI-39",
+          "rel": "self"
+        },
+        "number": 39,
+        "state": "Successful"
+      },
+      {
+        "id": 92668974,
+        "key": "ECO0260-NGCSS9CI-2",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0260-NGCSS9CI-2",
+          "rel": "self"
+        },
+        "number": 2,
+        "state": "Successful"
+      },
+      {
+        "id": 95426969,
+        "key": "ECO0299-ECXCI-55",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0299-ECXCI-55",
+          "rel": "self"
+        },
+        "number": 55,
+        "state": "Successful"
+      },
+      {
+        "id": 95421717,
+        "key": "ECO0299-NEWPORTCI-52",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0299-NEWPORTCI-52",
+          "rel": "self"
+        },
+        "number": 52,
+        "state": "Successful"
+      },
+      {
+        "id": 90046959,
+        "key": "ECO0299-NGCSCI-5",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECO0299-NGCSCI-5",
+          "rel": "self"
+        },
+        "number": 5,
+        "state": "Successful"
+      },
+      {
+        "id": 95427968,
+        "key": "ECX-CI-1099",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/ECX-CI-1099",
+          "rel": "self"
+        },
+        "number": 1099,
+        "state": "Failed"
+      },
+      {
+        "id": 95420934,
+        "key": "NGCS-CI-492",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/NGCS-CI-492",
+          "rel": "self"
+        },
+        "number": 492,
+        "state": "Successful"
+      },
+      {
+        "id": 95420951,
+        "key": "NGCS-CUKE-57",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/NGCS-CUKE-57",
+          "rel": "self"
+        },
+        "number": 57,
+        "state": "Successful"
+      },
+      {
+        "id": 95427594,
+        "key": "NGCS-PNCI-398",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/NGCS-PNCI-398",
+          "rel": "self"
+        },
+        "number": 398,
+        "state": "Failed"
+      },
+      {
+        "id": 95427863,
+        "key": "PT-CUKE-396",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/PT-CUKE-396",
+          "rel": "self"
+        },
+        "number": 396,
+        "state": "Successful"
+      },
+      {
+        "id": 85496220,
+        "key": "E2E-FULLDEPLOYCUKE-247",
+        "lifeCycleState": "Finished",
+        "link": {
+          "href": "http://bamboo.ec2.local/rest/api/latest/result/E2E-FULLDEPLOYCUKE-247",
+          "rel": "self"
+        },
+        "number": 247,
+        "state": "Failed"
+      }
+    ],
+    "size": 22,
+    "start-index": 0
+  }
+}

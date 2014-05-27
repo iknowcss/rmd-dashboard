@@ -27,19 +27,30 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: 'src/server/app.js',
-          port: 3000
+          script: 'src/server/app-dev.js'
+        }
+      },
+      mock: {
+        options: {
+          script: 'test/mock/server/app.js'
         }
       }
     },
     watch: {
       express: {
-        files:  [
+        files: [
           'src/server/**/*.js',
           'src/server/ui/**/*.*htm*',
-          'config/config.json'
+          'config/config*.json'
         ],
-        tasks:  [ 'express:dev' ],
+        tasks: [ 'express:dev' ],
+        options: {
+          spawn: false
+        }
+      },
+      mock: {
+        files: ['test/mock/**/*'],
+        tasks: ['express:mock'],
         options: {
           spawn: false
         }
@@ -54,6 +65,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jasmine_node']);
-  grunt.registerTask('run', ['express:dev', 'watch']);
+  grunt.registerTask('run', ['express:mock', 'express:dev', 'watch']);
 
 };

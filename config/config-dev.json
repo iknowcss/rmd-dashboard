@@ -1,0 +1,13 @@
+{
+  "express": {
+    "port": 3000
+  },
+  "bamboo-rest": {
+    "protocol": "http",
+    "host": "127.0.0.1",
+    "port": 3030,
+    "baseUrl": "/bamboo/rest/api",
+    "user": "user",
+    "pass": "password"
+  }
+}
