@@ -13,7 +13,7 @@ module.exports = {
   endpoints: [
     {
       get: function (req, res) {
-        resp.send({ available: true })
+        res.send({ available: true })
       }
     }, {
       uri: '/plan-digest',
