@@ -2,6 +2,9 @@
   "express": {
     "port": 3000
   },
+  "api": {
+    "version": "v1"
+  },
   "bamboo-rest": {
     "protocol": "http",
     "host": "127.0.0.1",

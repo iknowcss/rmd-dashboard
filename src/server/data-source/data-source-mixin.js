@@ -1,4 +1,5 @@
-var _       = require('underscore')
+var nconf   = require('nconf'),
+    _       = require('underscore')
     path    = require('path'),
     Q       = require('q'),
     request = require('request'),
@@ -6,6 +7,14 @@ var _       = require('underscore')
     logger  = require('../util/logger'),
 
     slice      = Array.prototype.slice;
+
+/// - Request defaults ---------------------------------------------------------
+
+nconf.defaults({
+  request: {
+    'reject-unauthorized': true
+  }
+});
 
 /// - Mixin applier ------------------------------------------------------------
 
@@ -24,7 +33,6 @@ module.exports = function (mixinPrototype, rawOptions) {
       // Put the baseUrl at the front of the array end with a forward-slash
       parts.unshift('/' + dataSourceOptions.baseUrl);
       parts.push('/');
-
 
       // Construct the full URL
       result = dataSourceOptions.protocol + '://' +
@@ -80,7 +88,9 @@ function processOptions(rawOptions) {
   copyProperties(['baseUrl'], copyString, rawOptions, options);
   copyProperties(['port'], copyIntegerOrUndefined, rawOptions, options);
 
-  options.defaultRequestOptions = {};
+  options.defaultRequestOptions = {
+    rejectUnauthorized: nconf.get('request:reject-unauthorized')
+  };
   if (!_.isUndefined(rawOptions.requestOptions)) {
     _.extend(options.defaultRequestOptions, rawOptions.requestOptions);
   }

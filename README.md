@@ -38,9 +38,28 @@ To set up the development environment, execute the following commands
 ## Create a `config.json` for your environment
 *rmd-dashboard* aggregates dashboard information from many different sources. For example, it can pull information about builds from Bamboo. You must put information about how to access these data sources `config/config.json`. **This file does not exist already; you must create your own before continuing**. There is an example file in `config/config.json.example`.
 
-## Run server in development mode
+# Start *rmd-dashboard*
+
+## Development mode
+
+**Note**: This mode uses `config/config-dev.json`
 
     grunt run
+
+or
+
+    grunt run:dev
+
+
+Start the *rmd-dashboard* server so that it communicates with a mock server. The mock server handles a number of endpoints that simulate what a real data source like Bamboo would provide. This makes it easy to develop without access to real data sources. Grunt will watch for changes in the server source code or mock source code and restart when they are made.
+
+## End-to-end (e2e) mode
+
+**Note**: This mode uses `config/config.json`
+
+    grunt run:e2e
+
+Start the *rmd-dashboard* server so that it communicates with real systems. Grunt will watch for changes in the server source code and restart when they are made.
 
 # Troubleshooting
 ## When I run `grunt bower:install` I get a Git error
@@ -54,9 +73,9 @@ Your firewall is probably blocking connections to port 22 (SSH). Run the followi
 
 Read more about it [here](https://coderwall.com/p/sitezg).
 
-## When I execute `grunt run` I get an error
+## When I execute `grunt run:e2e` I get an error
 Does it look like this?
 
-    The 'protocol' property must be a valid string
+    Config file "config/config.json" does not exist
 
 Did you create a `config/config.json` for your environment? You need one to tell *rmd-dashboard* where to find the information it aggregates. See [here](#create-a-configjson-for-your-environment).

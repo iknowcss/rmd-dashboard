@@ -22,38 +22,42 @@ module.exports = function (grunt) {
 
     },
     express: {
-      options: {
-
+      options: { },
+      mock: {
+        options: {
+          script: 'test/mock/server/app.js'
+        }
       },
       dev: {
         options: {
           script: 'src/server/app-dev.js'
         }
       },
-      mock: {
+      e2e: {
         options: {
-          script: 'test/mock/server/app.js'
+          script: 'src/server/app.js'
         }
       }
     },
     watch: {
-      express: {
+      'express-dev': {
         files: [
           'src/server/**/*.js',
           'src/server/ui/**/*.*htm*',
-          'config/config*.json'
+          'config/config-dev.json',
+          'test/mock/**/*'
         ],
-        tasks: [ 'express:dev' ],
-        options: {
-          spawn: false
-        }
+        tasks: ['express:mock', 'express:dev'],
+        options: { spawn: false }
       },
-      mock: {
-        files: ['test/mock/**/*'],
-        tasks: ['express:mock'],
-        options: {
-          spawn: false
-        }
+      'express-e2e': {
+        files: [
+          'src/server/**/*.js',
+          'src/server/ui/**/*.*htm*',
+          'config/config.json'
+        ],
+        tasks: ['express:e2e'],
+        options: { spawn: false }
       }
     }
   });
@@ -65,6 +69,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jasmine_node']);
-  grunt.registerTask('run', ['express:mock', 'express:dev', 'watch']);
+  grunt.registerTask('run', ['run:dev']);
+  grunt.registerTask('run:dev', ['express:mock', 'express:dev', 'watch:express-dev']);
+  grunt.registerTask('run:e2e', ['express:e2e', 'watch:express-e2e']);
 
 };

@@ -18,13 +18,18 @@ function Bootstrapper(parentApp, version) {
 _.extend(Bootstrapper.prototype, {
 
   bootstrap: function () {
-    this.prepareApiApp();
-    this.parentApp.use(this.app);
-  },
-
-  prepareApiApp: function () {
     logger.info('Start API ', this.version, ' using path: ', this.apiPath);
+    
+    // Prepare valid endpoints
     fs.readdirSync(this.apiPath).forEach(this.prepareApiFile, this);
+    
+    // Add 404 handler
+    this.app.get('/api/*', function (req, res) {
+      res.status(404).json({ statusCode: 404, error: 'Not found'});
+    });
+
+    // Add to parent app
+    this.parentApp.use(this.app);
   },
 
   prepareApiFile: function (fileName) {

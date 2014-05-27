@@ -29,7 +29,6 @@ datasource(BambooRest.prototype, {
   },
 
   requestOptions: {
-    rejectUnauthorized: nconf.get('request:reject-unauthorized'),
     json: true
   }
 
