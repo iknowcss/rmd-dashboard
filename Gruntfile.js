@@ -58,25 +58,6 @@ module.exports = function (grunt) {
         ],
         tasks: ['express:e2e'],
         options: { spawn: false }
-      },
-      uglify: {
-        files: [
-          'lib/ui/**/*.js',
-          'src/server/ui/js/**/*.js'
-        ],
-        tasks: ['uglify']
-      }
-    },
-    uglify: {
-      ui: {
-        options: {
-        },
-        files: {
-          'target/resource/js/main.js': [
-            'lib/ui/**/*.js',
-            'src/server/ui/js/**/*.js'
-          ]
-        }
       }
     }
   });
@@ -90,9 +71,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['jasmine_node']);
   grunt.registerTask('run', ['run:dev']);
-  grunt.registerTask('run:dev', ['uglify', 'express:mock', 'express:dev', 'watch:express-dev']);
-  grunt.registerTask('run:e2e', ['uglify', 'express:e2e', 'watch:express-e2e']);
+  grunt.registerTask('run:dev', ['express:mock', 'express:dev', 'watch:express-dev']);
+  grunt.registerTask('run:e2e', ['express:e2e', 'watch:express-e2e']);
 
-  grunt.registerTask('run:e2e', ['uglify', 'express:e2e', 'watch:express-e2e']);
+  grunt.registerTask('run:e2e', ['express:e2e', 'watch:express-e2e']);
 
 };

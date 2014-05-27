@@ -3,19 +3,19 @@ var fs      = require('fs'),
     express = require('express'),
     _       = require('underscore'),
 
-    logger  = require('../util/logger');
+    logger  = require('../util/logger')
 
 function Bootstrapper(parentApp) {
   this.parentApp = parentApp;
   this.app = express();
-  this.htmlPath = path.join(__dirname, 'html');
+  this.htmlPath = path.join(__dirname, '../../ui/html');
 }
 
 _.extend(Bootstrapper.prototype, {
 
   bootstrap: function () {
     this.prepareUiApp();
-    this.prepareStaticResources();
+    this.prepareMiddleware();
     this.parentApp.use(this.app);
   },
 
@@ -24,10 +24,26 @@ _.extend(Bootstrapper.prototype, {
     fs.readdirSync(this.htmlPath).forEach(this.prepareHtmlFile, this);
   },
 
-  prepareStaticResources: function () {
-    var uiPath = path.join(__dirname + '../../../../target/resource');
-    logger.info('Use static resources at: ' + uiPath);
-    this.app.use('/resource', express.static(uiPath));
+  prepareMiddleware: function () {
+    var uiDir     = path.join(__dirname, '../../ui'),
+        libDir    = path.join(__dirname, '../../../lib'),
+        lessSrc   = path.join(uiDir, '/less'),
+        libJsSrc  = path.join(libDir, '/js'),
+        jsSrc     = path.join(uiDir, '/js');
+
+    // Less
+    logger.info('Prepare CSS middleware: ' + lessSrc);
+    this.app.use('/resource/css', require('less-middleware')(lessSrc));
+    this.app.use('/resource/css', express.static(lessSrc));
+
+    // Uglify UI JavaScript
+    logger.info('Prepare JavaScript lib middleware: ' + libJsSrc);
+    this.app.use('/resource/lib/js', express.static(libJsSrc));
+
+    // Uglify UI JavaScript
+    logger.info('Prepare JavaScript middleware: ' + jsSrc);
+    this.app.use('/resource/js', require('uglifyjs-middleware')(jsSrc));
+    this.app.use('/resource/js', express.static(jsSrc));
   },
 
   prepareHtmlFile: function (fileName) {
@@ -40,11 +56,11 @@ _.extend(Bootstrapper.prototype, {
       logger.info('Prepare UI file: ' + fileName);
       relativeUri = match[1];
       if (relativeUri === 'index') {
-        relativeUri = '/';
+        relativeUri = '';
       }
-      uri = path.join('/ui/' + relativeUri);
+      uri = path.join('/ui', relativeUri);
       logger.info('Prepare ' + uri);
-      this.app.get(uri, function (req, res) {
+      this.app.use(uri, function (req, res) {
         logger.info('GET ' + uri);
         res.sendfile(path.join(self.htmlPath, fileName));
       });

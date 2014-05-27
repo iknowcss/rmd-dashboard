@@ -1,4 +1,5 @@
 var fs      = require('fs'),
+    path    = require('path'),
     nconf   = require('nconf'),
     express = require('express'),
     _       = require('underscore'),
@@ -51,15 +52,25 @@ module.exports = function (configPath) {
   // Prepare the app
   app = express();
 
+  // Root redirect
+  app.get('', function (req, res) { res.redirect('/ui/'); });
+
   // Handlers
   require('./api/boot')(app, apiVersion);
   require('./ui/boot')(app);
 
+  // Favicon
+  app.use(require('serve-favicon')(path.join(__dirname, '../ui/favicon.ico')));
+
   // Global 404
   app.use(function (req, res) {
     logger.warn('404 Not found: ' + req.url);
-    res.status(404).send('404 Not found');
-  })
+    res.status(404).send('<!doctype html>' +
+        '<html>' +
+        '<head><title>404 Not Found</title></head>' +
+        '<body>404 Not found</body>'+
+        '</html>');
+  });
 
   // Start
   server = app.listen(expressPort, function () {
