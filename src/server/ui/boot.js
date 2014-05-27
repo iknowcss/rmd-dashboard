@@ -15,12 +15,19 @@ _.extend(Bootstrapper.prototype, {
 
   bootstrap: function () {
     this.prepareUiApp();
+    this.prepareStaticResources();
     this.parentApp.use(this.app);
   },
 
   prepareUiApp: function () {
     logger.info('Start UI using HTML path: ' + this.htmlPath);
     fs.readdirSync(this.htmlPath).forEach(this.prepareHtmlFile, this);
+  },
+
+  prepareStaticResources: function () {
+    var uiPath = path.join(__dirname + '../../../../target/resource');
+    logger.info('Use static resources at: ' + uiPath);
+    this.app.use('/resource', express.static(uiPath));
   },
 
   prepareHtmlFile: function (fileName) {
@@ -36,8 +43,9 @@ _.extend(Bootstrapper.prototype, {
         relativeUri = '/';
       }
       uri = path.join('/ui/' + relativeUri);
-      logger.info('GET ' + uri);
+      logger.info('Prepare ' + uri);
       this.app.get(uri, function (req, res) {
+        logger.info('GET ' + uri);
         res.sendfile(path.join(self.htmlPath, fileName));
       });
     } else {
