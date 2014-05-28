@@ -35,6 +35,8 @@ To set up the development environment, execute the following commands
     npm install
     grunt bower:install
 
+**Note**: You will need to do this every time you do a pull!
+
 ## Create a `config.json` for your environment
 *rmd-dashboard* aggregates dashboard information from many different sources. For example, it can pull information about builds from Bamboo. You must put information about how to access these data sources `config/config.json`. **This file does not exist already; you must create your own before continuing**. There is an example file in `config/config.json.example`.
 
@@ -89,3 +91,8 @@ Does it look like this?
     Config file "config/config.json" does not exist
 
 Did you create a `config/config.json` for your environment? You need one to tell *rmd-dashboard* where to find the information it aggregates. See [here](#create-a-configjson-for-your-environment).
+
+## I can't load the JavaScript libraries
+Make sure to run `bower`
+
+    grunt bower:install

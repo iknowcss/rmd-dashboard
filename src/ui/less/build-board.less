@@ -1,0 +1,24 @@
+@column-width: 300px;
+@gutter-width: 4px;
+
+body {
+  background-color: black;
+  color: white;
+}
+
+#build-list {
+  text-align: center;
+  margin: 0 auto 1em auto;
+
+  li {
+    display: inline-block;
+    margin: 1em 0 0 @gutter-width;
+    padding: 1em @gutter-width * 3;
+    width: @column-width;
+    overflow: hidden;
+    vertical-align: text-top;
+
+    &.build-state-successful { background-color: #006622; }
+    &.build-state-failed { background-color: #662200; }
+  }
+}

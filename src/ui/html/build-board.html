@@ -1,8 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" type="text/css" href="/resource/css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="/resource/css/build-board.css"/>
+  <script type="text/javascript" src="/resource/lib/js/underscore/underscore.js"></script>
+  <script type="text/javascript" src="/resource/lib/js/jquery/jquery.js"></script>
+  <script type="text/javascript" src="/resource/lib/js/knockout/knockout.js"></script>
+  <script type="text/javascript" src="/resource/js/page/build-board.min.js"></script>
 </head>
 <body>
-  Build board
+  <ul id="build-list" data-bind="foreach: builds"><li 
+      data-bind="css: $parent.stateCss(state)">
+    <div class="build-identifier" data-bind="text: plan.key"></div>
+    <div class="build-identifier" data-bind="text: plan.shortName"></div>
+  </li></ul>
 </body>
 </html>

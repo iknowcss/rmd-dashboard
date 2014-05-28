@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     bower: {
       install: {
         options: {
-          targetDir: './lib/ui',
+          targetDir: './lib/js',
           layout: 'byComponent',
           install: true,
           verbose: false,
