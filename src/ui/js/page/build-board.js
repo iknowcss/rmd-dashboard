@@ -34,6 +34,23 @@ _.extend(BuildBoard.prototype, {
       default:
         return 'build-state-unknown'
     }
+  },
+
+  stateIconCss: function (state) {
+    var stateLower;
+    if (!state) {
+      return;
+    }
+
+    stateLower = state.toLowerCase();
+    switch (stateLower) {
+      case 'successful':
+        return 'icon-ok'
+      case 'failed':
+        return 'icon-cancel';
+      default:
+        return ''
+    }
   }
 
 });

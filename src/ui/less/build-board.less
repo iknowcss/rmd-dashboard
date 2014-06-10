@@ -1,5 +1,4 @@
-@column-width: 300px;
-@gutter-width: 4px;
+@column-width: 301px;
 
 body {
   background-color: black;
@@ -10,15 +9,43 @@ body {
   text-align: center;
   margin: 0 auto 1em auto;
 
-  li {
-    display: inline-block;
-    margin: 1em 0 0 @gutter-width;
-    padding: 1em @gutter-width * 3;
-    width: @column-width;
+  .build {
+    box-sizing: border-box;
+    float: left;
+    border-left: 1px solid black;
+    padding: 0.5em 0;
+    margin-bottom: 1em;
+    width: 25%;
     overflow: hidden;
     vertical-align: text-top;
 
-    &.build-state-successful { background-color: #006622; }
-    &.build-state-failed { background-color: #662200; }
+    &:first-child {
+      border-left: none;
+    }
+
+    &.build-state-successful { background-color: #339933; }
+    &.build-state-failed     { background-color: #962526; }
+    &.build-state-unknown    { background-color: #666666; }
+
+    .build-short-name {
+      font-size: 1.5em;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 0.25em;
+      overflow-x: hidden;
+      white-space: nowrap;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-left-width: 0;
+      border-right-width: 0;
+
+      &:before {
+        color: rgba(255, 255, 255, 0.50);
+      }
+    }
+
+    .build-key {
+      margin-top: 0.5em;
+      font-size: 0.75em;
+    }
   }
 }

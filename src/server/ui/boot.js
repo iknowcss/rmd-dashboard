@@ -16,6 +16,7 @@ _.extend(Bootstrapper.prototype, {
   bootstrap: function () {
     this.prepareUiApp();
     this.prepareMiddleware();
+    this.prepareStatic();
     this.parentApp.use(this.app);
   },
 
@@ -44,6 +45,11 @@ _.extend(Bootstrapper.prototype, {
     logger.info('Prepare JavaScript middleware: ' + jsSrc);
     this.app.use('/resource/js', require('uglifyjs-middleware')(jsSrc));
     this.app.use('/resource/js', express.static(jsSrc));
+  },
+
+  prepareStatic: function () {
+    var uiDir = path.join(__dirname, '../../ui');
+    this.app.use('/resource', express.static(uiDir));
   },
 
   prepareHtmlFile: function (fileName) {

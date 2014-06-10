@@ -9,10 +9,15 @@
   <script type="text/javascript" src="/resource/js/page/build-board.min.js"></script>
 </head>
 <body>
-  <ul id="build-list" data-bind="foreach: builds"><li 
-      data-bind="css: $parent.stateCss(state)">
-    <div class="build-identifier" data-bind="text: plan.key"></div>
-    <div class="build-identifier" data-bind="text: plan.shortName"></div>
-  </li></ul>
+  <div id="build-list" data-bind="foreach: builds">
+    <div class="build" 
+        data-bind="css    : $parent.stateCss(state),
+                   style  : { clear: $index() % 4 == 0 ? 'left' : 'none' }">
+      <div class="build-short-name"
+          data-bind="text : plan.shortName,
+                     css  : $parent.stateIconCss(state)"></div>
+      <div class="build-key" data-bind="text: plan.key"></div>
+    </div>
+  </div>
 </body>
 </html>
